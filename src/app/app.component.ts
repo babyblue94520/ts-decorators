@@ -1,4 +1,12 @@
 import { Component } from '@angular/core';
+import { Debounce } from 'ts/decorators/debounce';
+import { Throttle } from 'ts/decorators/throttle';
+import { CacheLocal, CacheSession } from 'ts/decorators/cache';
+import { LocalStorageManager } from 'ts/storage/storage-manager';
+import { jsonToHtml } from '../ts/json';
+import { result } from '../ts/data';
+import { CUI } from 'ts/cui';
+
 
 @Component({
   selector: 'app-root',
@@ -6,5 +14,33 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'ts-decorators';
+  @CacheLocal('App', 'ts-decorators')
+  public title;
+  @CacheSession('App', {
+    debounce: true
+    , throttle: false
+    , aab: '<script><//"122&emsp;\naaa'
+    , test: [1, 2, 3, 4, 5, 6]
+  })
+  public expandeds;
+
+  constructor() {
+    window.addEventListener('resize', this.debounce.bind(this));
+    window.addEventListener('resize', this.throttle.bind(this));
+    console.log(LocalStorageManager.get('test'));
+  }
+
+  @Debounce(300)
+  private debounce() {
+    console.log(this, 'debounce');
+  }
+
+  @Throttle(1000)
+  private throttle() {
+    console.log(this, 'throttle');
+  }
+
+  public toHtml(d): string {
+    return jsonToHtml(d);
+  }
 }
