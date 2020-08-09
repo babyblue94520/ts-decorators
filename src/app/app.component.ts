@@ -4,8 +4,6 @@ import { Throttle } from 'ts/decorators/throttle';
 import { CacheLocal, CacheSession } from 'ts/decorators/cache';
 import { LocalStorageManager } from 'ts/storage/storage-manager';
 import { jsonToHtml } from '../ts/json';
-import { result } from '../ts/data';
-import { CUI } from 'ts/cui';
 
 
 @Component({
@@ -21,6 +19,8 @@ export class AppComponent {
     , throttle: false
     , aab: '<script><//"122&emsp;\naaa'
     , test: [1, 2, 3, 4, 5, 6]
+    , bb: [7, 8]
+    , cc: []
   })
   public expandeds;
 

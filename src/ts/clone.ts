@@ -56,18 +56,18 @@ function deepCopy(logs, dest, source) {
     logs.push(source);
     // tslint:disable-next-line:forin
     for (let i in source) {
-        dest[i] = getValue(logs, source[i]);
+        dest[i] = getValue(logs, dest[i], source[i]);
     }
     return dest;
 }
 
-function getValue(logs, v) {
-    if (Array.isArray(v)) {
-        return deepCopy(logs, [], v);
-    } else if (isObject(v)) {
-        return deepCopy(logs, {}, v);
+function getValue(logs, dest, source) {
+    if (Array.isArray(source)) {
+        return deepCopy(logs, dest, source);
+    } else if (isObject(source)) {
+        return deepCopy(logs, dest, source);
     } else {
-        return v;
+        return source;
     }
 }
 

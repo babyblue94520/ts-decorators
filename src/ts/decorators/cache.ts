@@ -28,8 +28,8 @@ function basic(name: string, defaultValue: any, root: string, target, key: strin
     // tslint:disable-next-line:variable-name
     let _key = root + '.' + name + '.' + key;
     // tslint:disable-next-line:variable-name
-    let _val = this[_key];
-    this[_key] = deepClone(defaultValue, _val);
+    console.log(defaultValue, this[_key]);
+    let _val = this[_key] = deepClone(defaultValue, this[_key]);
     unloadHandlers[_key] = () => {
         this[_key] = _val;
     };

@@ -5,8 +5,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserModule } from '@angular/platform-browser';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { NgModule } from '@angular/core';
-import { CUI } from 'ts/cui';
-import { jsonToHtml } from 'ts/json';
 
 @NgModule({
   declarations: [
