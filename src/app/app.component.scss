@@ -4,19 +4,30 @@
   height: 100%;
 
   .left {
-    flex: 1 1 0;
-    width: 100%;
+    flex: 1;
+    min-width: 20em;
     overflow-y: auto;
   }
 
   .right {
-    flex: 1 1 0;
-    width: 100%;
+    flex-shrink: 0;
     min-width: 20em;
     overflow-y: auto;
 
     .right-inside {
       margin: 10px;
+    }
+  }
+
+  .button-row {
+    button {
+      margin: 5px;
+    }
+  }
+
+  .form {
+    mat-form-field {
+      margin: 5px;
     }
   }
 }

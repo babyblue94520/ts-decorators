@@ -2,12 +2,12 @@
 const Space = '&emsp;&emsp;';
 const Comma = ',&ensp;';
 const Br = '<br>';
-
 const EscapedKey = {
     '<': '&lt;'
     , '>': '&gt;'
     , '&': '&amp;'
 };
+
 let currentSpace = '';
 
 /**
@@ -16,29 +16,24 @@ let currentSpace = '';
  * @return {String} html
  */
 export function jsonToHtml(data): string {
-    let t = Date.now();
-    try {
-        if (!data) {
+    if (!data) {
+        return data;
+    }
+    currentSpace = '';
+    if (data.constructor === Object) {
+        return toHtml(data);
+    }
+    if (data.constructor === Array) {
+        return toHtml(data);
+    }
+    if (typeof data === 'string') {
+        try {
+            return toHtml(JSON.parse(data.replace(/\n/g, '\\\\n')));
+        } catch (e) {
             return data;
         }
-        currentSpace = '';
-        if (data.constructor === Object) {
-            return toHtml(data);
-        }
-        if (data.constructor === Array) {
-            return toHtml(data);
-        }
-        if (typeof data === 'string') {
-            try {
-                return toHtml(JSON.parse(data.replace(/\n/g, '\\\\n')));
-            } catch (e) {
-                return data;
-            }
-        }
-        return data;
-    } finally {
-        console.log(Date.now() - t);
     }
+    return data;
 
 }
 
@@ -100,8 +95,8 @@ function arrayToHtml(array: any[]): string {
     }
 }
 
-
-function getArrayContent(array, separate) {
+function getArrayContent(array: any[], separate) {
+    if (array.length < 2) { return ''; }
     let temp = '';
     for (let i = 1; i < array.length; i++) {
         temp += separate + toHtml(array[i]);

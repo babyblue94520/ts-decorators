@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HtmlPipe } from './pipe/html.pipe';
+import { FormsModule } from '@angular/forms';
 
 
 
@@ -8,9 +9,13 @@ import { HtmlPipe } from './pipe/html.pipe';
   declarations: [HtmlPipe],
   imports: [
     CommonModule
+    , FormsModule
   ]
   , exports: [
-    HtmlPipe
+    CommonModule
+    , FormsModule
+    , HtmlPipe
+
   ]
 })
 export class AppCommonModule { }

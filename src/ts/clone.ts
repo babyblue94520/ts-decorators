@@ -63,9 +63,9 @@ function deepCopy(logs, dest, source) {
 
 function getValue(logs, dest, source) {
     if (Array.isArray(source)) {
-        return deepCopy(logs, dest, source);
+        return deepCopy(logs, dest || [], source);
     } else if (isObject(source)) {
-        return deepCopy(logs, dest, source);
+        return deepCopy(logs, dest || {}, source);
     } else {
         return source;
     }

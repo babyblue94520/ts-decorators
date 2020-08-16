@@ -11,6 +11,10 @@ const sessionData = SessionStorageManager.get(cacheKey, false) || {};
  * 回寫到storage
  */
 window.addEventListener('unload', () => {
+    // tslint:disable-next-line:forin
+    for (let i in unloadHandlers) {
+        unloadHandlers[i]();
+    }
     LocalStorageManager.set(cacheKey, localData, false);
     SessionStorageManager.set(cacheKey, sessionData, false);
 });
@@ -28,7 +32,6 @@ function basic(name: string, defaultValue: any, root: string, target, key: strin
     // tslint:disable-next-line:variable-name
     let _key = root + '.' + name + '.' + key;
     // tslint:disable-next-line:variable-name
-    console.log(defaultValue, this[_key]);
     let _val = this[_key] = deepClone(defaultValue, this[_key]);
     unloadHandlers[_key] = () => {
         this[_key] = _val;
