@@ -2,6 +2,8 @@
 
 利用 TypeScript 開發好用的 Decorator
 
+[demo](https://babyblue94520.github.io/ts-decorators/dist/)
+
 ## Debounce
 
 避免短時間執行多次的方法，造成效能上的浪費，譬如： resize、scroll
