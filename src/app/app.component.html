@@ -88,6 +88,10 @@
   </div>
   <div class="right">
     <div class="right-inside">
+      <div class="button-row">
+        <button mat-raised-button color="accent" (click)="clearAllLocal()">clearAllLocal</button>
+        <button mat-raised-button color="accent" (click)="clearAllSession()">clearAllSession</button>
+      </div>
       <h2>Json Viewer & Cache Variable</h2>
       <div [innerHTML]="toHtml(status)|html"></div>
       <h2>User</h2>

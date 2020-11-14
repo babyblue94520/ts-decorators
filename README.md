@@ -63,19 +63,36 @@
 
 簡單的使用 **localStorage**、**sessionStorage**
 
-### CacheLocal
+### CCache.Local
 
 從 **localStorage** 讀取變數名稱的值，**window.unload**時，將變數值回寫到 **localStorage**
 
-    @CacheLocal('App', defaultStatus())
+    @CCache.Local('App', defaultStatus())
     public status: Status;
 
-### CacheSession
+### CCache.Session
 
 從 **sessionStorage** 讀取變數名稱的值，**window.unload**時，將變數值回寫到 **sessionStorage**
 
-    @CacheSession<User>('App', defauleUser())
+    @CCache.Session<User>('App', defauleUser())
     public user: User;
+
+### Clear
+
+清除目前的 **cache** 並還原成預設值
+
+
+    // 清除還原所有區塊
+    CCache.clearAllLocal();
+
+    // 清除還原所有區塊
+    CCache.clearAllSession();
+
+    // 清除還原指定區塊
+    CCache.clearLocal('_');
+
+    // 清除還原指定區塊
+    CCache.clearSession('_');
 
 ## Json Viewer
 

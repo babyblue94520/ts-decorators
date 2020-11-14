@@ -1,10 +1,10 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
 import { Debounce } from 'ts/decorators/debounce';
 import { Throttle } from 'ts/decorators/throttle';
-import { CacheLocal, CacheSession } from 'ts/decorators/cache';
 import { jsonToHtml } from '../ts/json';
 import { deepClone } from '../ts/clone';
 import { Async } from 'ts/decorators/async';
+import { CCache } from 'ts/decorators/cache';
 
 
 interface Status {
@@ -34,7 +34,7 @@ interface User {
 
 export function defauleUser(): User {
   return {
-    name: ''
+    name: 'test'
     , birthday: ''
     , phone: ''
     , email: ''
@@ -50,13 +50,13 @@ export class AppComponent {
   public static debounceTime = 300;
   public static throttleTime = 1000;
 
-  @CacheLocal<Status>('App', defaultStatus())
+  @CCache.Local<Status>('App', defaultStatus())
   public status;
 
-  @CacheSession<User>('App', defauleUser())
+  @CCache.Session<User>('App', defauleUser())
   public user: User;
 
-  @CacheSession<User>('App', defauleUser())
+  @CCache.Session<User>('App', defauleUser())
   public userClone: User;
 
   @ViewChild('messageWrap')
@@ -128,5 +128,13 @@ export class AppComponent {
 
   public toHtml(d): string {
     return jsonToHtml(d);
+  }
+
+  public clearAllLocal() {
+    CCache.clearAllLocal();
+  }
+
+  public clearAllSession() {
+    CCache.clearAllSession();
   }
 }

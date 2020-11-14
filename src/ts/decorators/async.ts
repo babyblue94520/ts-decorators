@@ -12,8 +12,9 @@ function build(delay, target, name, descriptor) {
         descriptor = Object.getOwnPropertyDescriptor(target, name);
     }
     let method = descriptor.value;
-    descriptor.value = function(...args) {
-        setTimeout(runner.bind(this, method, ...args), delay);
+    // tslint:disable-next-line:space-before-function-paren
+    descriptor.value = function (...args): number {
+        return setTimeout(runner.bind(this, method, ...args), delay);
     };
     return descriptor;
 }

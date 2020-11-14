@@ -13,11 +13,13 @@ function build(interval: number, target, name: string, descriptor: PropertyDescr
     }
     let method = descriptor.value;
     let key = '__debounce_' + name;
-    descriptor.value = function(...args) {
+    // tslint:disable-next-line:space-before-function-paren
+    descriptor.value = function (...args) {
         if (this[key]) {
             clearTimeout(this[key]);
         }
-        this[key] = setTimeout(runner.bind(this, method, ...args), interval);
+        return this[key] = setTimeout(runner.bind(this, method, ...args), interval);
+
     };
     return descriptor;
 }
