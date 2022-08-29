@@ -1,5 +1,5 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
-import { Debounce } from 'ts/decorators/debounce';
+import { Delay } from 'ts/decorators/delay';
 import { Throttle } from 'ts/decorators/throttle';
 import { jsonToHtml } from '../ts/json';
 import { deepClone } from '../ts/clone';
@@ -47,7 +47,7 @@ export function defauleUser(): User {
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  public static debounceTime = 300;
+  public static delayTime = 300;
   public static throttleTime = 1000;
 
   @CCache.Local<Status>('App', defaultStatus())
@@ -63,7 +63,7 @@ export class AppComponent {
   public messageWrapRef: ElementRef;
 
   constructor() {
-    window.addEventListener('resize', this.debounce.bind(this));
+    window.addEventListener('resize', this.delay.bind(this));
     window.addEventListener('resize', this.throttle.bind(this));
     this.changeTitle();
   }
@@ -73,19 +73,24 @@ export class AppComponent {
 
   }
 
-  @Debounce(AppComponent.debounceTime)
-  public debounce() {
+  @Delay(AppComponent.delayTime, AppComponent.throttleTime)
+  public delay() {
     this.count();
+  }
+
+  public throttle() {
+    this.doThrottle();
   }
 
   @Throttle(AppComponent.throttleTime)
-  public throttle() {
-    this.count();
+  private doThrottle() {
+    return this.count();
   }
 
-  public count() {
+  public count(): number {
     this.status.count++;
     this.changeTitle();
+    return this.status.count;
   }
 
   public clear() {

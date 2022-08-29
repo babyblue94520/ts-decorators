@@ -1,22 +1,30 @@
 <div class="container">
   <div class="left">
-    <mat-accordion style="width: 100%;" multi>
-      <mat-expansion-panel [expanded]="status['Debounce & Throttle']" (opened)="status['Debounce & Throttle'] = true"
-        (closed)="status['Debounce & Throttle'] = false">
+    <mat-accordion style="width: 100%" multi>
+      <mat-expansion-panel
+        [expanded]="status['Delay & Throttle']"
+        (opened)="status['Delay & Throttle'] = true"
+        (closed)="status['Delay & Throttle'] = false"
+      >
         <mat-expansion-panel-header>
           <mat-panel-title>
-            <h2>Debounce & Throttle</h2>
+            <h2>Delay & Throttle</h2>
           </mat-panel-title>
-          <mat-panel-description>
-          </mat-panel-description>
+          <mat-panel-description> </mat-panel-description>
         </mat-expansion-panel-header>
         <ng-template matExpansionPanelContent>
           <div class="container">
             <div class="left">
               <div class="button-row">
-                <button mat-raised-button color="primary" (click)="debounce()">debounce 300ms</button>
-                <button mat-raised-button color="primary" (click)="throttle()">throttle 1s</button>
-                <button mat-raised-button color="accent" (click)="clear()">clear</button>
+                <button mat-raised-button color="primary" (click)="delay()">
+                  delay 300ms
+                </button>
+                <button mat-raised-button color="primary" (click)="throttle()">
+                  throttle 1s
+                </button>
+                <button mat-raised-button color="accent" (click)="clear()">
+                  clear
+                </button>
               </div>
             </div>
             <div class="right">
@@ -27,60 +35,97 @@
           </div>
         </ng-template>
       </mat-expansion-panel>
-      <mat-expansion-panel [expanded]="status.async" (opened)="status.async = true" (closed)="status.async = false">
+      <mat-expansion-panel
+        [expanded]="status.async"
+        (opened)="status.async = true"
+        (closed)="status.async = false"
+      >
         <mat-expansion-panel-header>
           <mat-panel-title>
             <h2>Async</h2>
           </mat-panel-title>
-          <mat-panel-description>
-          </mat-panel-description>
+          <mat-panel-description> </mat-panel-description>
         </mat-expansion-panel-header>
         <ng-template matExpansionPanelContent>
           <form class="form">
             <mat-form-field>
               <mat-label>Message</mat-label>
-              <input matInput placeholder="your name" name="name" [(ngModel)]="status.message">
+              <input
+                matInput
+                placeholder="your name"
+                name="name"
+                [(ngModel)]="status.message"
+              />
             </mat-form-field>
           </form>
           <div class="button-row">
-            <button mat-raised-button color="primary" (click)="showMessage()">show</button>
+            <button mat-raised-button color="primary" (click)="showMessage()">
+              show
+            </button>
           </div>
         </ng-template>
       </mat-expansion-panel>
-      <mat-expansion-panel [expanded]="status.cache" (opened)="status.cache = true" (closed)="status.cache = false">
+      <mat-expansion-panel
+        [expanded]="status.cache"
+        (opened)="status.cache = true"
+        (closed)="status.cache = false"
+      >
         <mat-expansion-panel-header>
           <mat-panel-title>
             <h2>Cache</h2>
           </mat-panel-title>
-          <mat-panel-description>
-          </mat-panel-description>
+          <mat-panel-description> </mat-panel-description>
         </mat-expansion-panel-header>
         <ng-template matExpansionPanelContent>
           <form class="form">
             <mat-form-field>
               <mat-label>Name</mat-label>
-              <input matInput placeholder="your name" name="name" [(ngModel)]="user.name">
+              <input
+                matInput
+                placeholder="your name"
+                name="name"
+                [(ngModel)]="user.name"
+              />
             </mat-form-field>
             <mat-form-field>
               <mat-label>Birthday</mat-label>
-              <input matInput [matDatepicker]="picker" name="birthday" [(ngModel)]="user.birthday">
+              <input
+                matInput
+                [matDatepicker]="picker"
+                name="birthday"
+                [(ngModel)]="user.birthday"
+              />
               <mat-datepicker-toggle matSuffix [for]="picker">
               </mat-datepicker-toggle>
             </mat-form-field>
             <mat-form-field>
               <mat-label>Phone</mat-label>
-              <input matInput placeholder="your phone" name="phone" [(ngModel)]="user.phone"
-                [ngModelOptions]="{standalone: true}">
+              <input
+                matInput
+                placeholder="your phone"
+                name="phone"
+                [(ngModel)]="user.phone"
+                [ngModelOptions]="{ standalone: true }"
+              />
             </mat-form-field>
             <mat-form-field>
               <mat-label>Email</mat-label>
-              <input matInput placeholder="your email" name="email" [(ngModel)]="user.email"
-                [ngModelOptions]="{standalone: true}">
+              <input
+                matInput
+                placeholder="your email"
+                name="email"
+                [(ngModel)]="user.email"
+                [ngModelOptions]="{ standalone: true }"
+              />
             </mat-form-field>
           </form>
           <div class="button-row">
-            <button mat-raised-button color="accent" (click)="clearUser()">clear</button>
-            <button mat-raised-button color="dark" (click)="cloneUser()">clone</button>
+            <button mat-raised-button color="accent" (click)="clearUser()">
+              clear
+            </button>
+            <button mat-raised-button color="dark" (click)="cloneUser()">
+              clone
+            </button>
           </div>
         </ng-template>
       </mat-expansion-panel>
@@ -89,17 +134,21 @@
   <div class="right">
     <div class="right-inside">
       <div class="button-row">
-        <button mat-raised-button color="accent" (click)="clearAllLocal()">clearAllLocal</button>
-        <button mat-raised-button color="accent" (click)="clearAllSession()">clearAllSession</button>
+        <button mat-raised-button color="accent" (click)="clearAllLocal()">
+          clearAllLocal
+        </button>
+        <button mat-raised-button color="accent" (click)="clearAllSession()">
+          clearAllSession
+        </button>
       </div>
       <h2>Json Viewer & Cache Variable</h2>
-      <div [innerHTML]="toHtml(status)|html"></div>
+      <div [innerHTML]="toHtml(status) | html"></div>
       <h2>User</h2>
-      <div [innerHTML]="toHtml(user)|html"></div>
+      <div [innerHTML]="toHtml(user) | html"></div>
       <h2>Clone User</h2>
-      <div [innerHTML]="toHtml(userClone)|html"></div>
+      <div [innerHTML]="toHtml(userClone) | html"></div>
     </div>
   </div>
 </div>
-<div class="message-wrap" #messageWrap> </div>
+<div class="message-wrap" #messageWrap></div>
 <mat-datepicker #picker></mat-datepicker>
